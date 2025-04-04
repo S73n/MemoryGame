@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const nameInput = document.querySelector('#name');
   const startButton = document.querySelector('#startButton');
   const timerDisplay = document.querySelector('#timer');  // Display the timer
+  const messageDisplay = document.querySelector('#message'); // Message display area
   
   let cardsChosen = [];
   let cardsChosenId = [];
@@ -59,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cardsWon = []; // Reset the won pairs
     resultDisplay.textContent = '0'; // Reset the score
     timerDisplay.textContent = '0'; // Reset the timer display
+    messageDisplay.textContent = ''; // Clear any previous messages
     createBoard(); // Create the new game board
     startTimer(); // Start the timer
   });
@@ -87,10 +89,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (optionOneId === optionTwoId) {
       cards[optionOneId].setAttribute('src', 'images/blank.png');
       cards[optionTwoId].setAttribute('src', 'images/blank.png');
-      alert('You have clicked the same image!');
+      messageDisplay.textContent = 'You have clicked the same image!'; // Message display
     }
     else if (cardsChosen[0] === cardsChosen[1]) {
-      alert('You found a match');
+      messageDisplay.textContent = 'You found a match'; // Message display
       cards[optionOneId].setAttribute('src', 'images/white.png');
       cards[optionTwoId].setAttribute('src', 'images/white.png');
       cards[optionOneId].removeEventListener('click', flipCard);
@@ -99,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       cards[optionOneId].setAttribute('src', 'images/blank.png');
       cards[optionTwoId].setAttribute('src', 'images/blank.png');
-      alert('Sorry, try again');
+      messageDisplay.textContent = 'Sorry, try again'; // Message display
     }
 
     cardsChosen = [];
@@ -130,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function calculateTime() {
     const timeTaken = (Date.now() - startTime) / 1000;
     const level = timeTaken < 60 ? 'Master' : timeTaken < 120 ? 'Expert' : 'Beginner';
-    alert(`You completed the game in ${timeTaken.toFixed(2)} seconds. Your level is: ${level}`);
+    messageDisplay.textContent = `You completed the game in ${timeTaken.toFixed(2)} seconds. Your level is: ${level}`; // Display message
   }
 
   // Initialize the game
