@@ -1,6 +1,90 @@
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+h3 {
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+#result {
+  font-weight: bold;
+  color: #333;
+}
+
+.game-info {
+  margin: 20px;
+}
+
+input[type="text"] {
+  padding: 8px;
+  font-size: 16px;
+  margin-right: 10px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:active {
+  background-color: #3e8e41;
+}
+
+/* Grid style */
 .grid {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
   width: 400px;
-  height: 300px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.grid img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: transform 0.3s ease;
+}
+
+.grid img:hover {
+  transform: scale(1.1);
+}
+
+.grid img:active {
+  transform: scale(0.95);
+}
+
+img[src="images/blank.png"] {
+  background-color: #ccc;
+  border: 2px solid #999;
+}
+
+img[src="images/white.png"] {
+  background-color: #fff;
+  border: 2px solid #999;
 }
