@@ -19,11 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const resultDisplay = document.querySelector('#result');
   const nameInput = document.querySelector('#name');
   const startButton = document.querySelector('#startButton');
+  const timerDisplay = document.querySelector('#timer');  // Display the timer
   
   let cardsChosen = [];
   let cardsChosenId = [];
   let cardsWon = [];
   let startTime = 0;
+  let timerInterval;
 
   // Shuffle the cards randomly
   function shuffleCards() {
@@ -56,8 +58,25 @@ document.addEventListener('DOMContentLoaded', () => {
     cardsChosenId = []; // Reset the chosen card IDs
     cardsWon = []; // Reset the won pairs
     resultDisplay.textContent = '0'; // Reset the score
+    timerDisplay.textContent = '0'; // Reset the timer display
     createBoard(); // Create the new game board
+    startTimer(); // Start the timer
   });
+
+  // Start the timer
+  function startTimer() {
+    // Clear any existing intervals
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+      const timeElapsed = (Date.now() - startTime) / 1000; // Time in seconds
+      timerDisplay.textContent = timeElapsed.toFixed(1); // Update the timer display
+    }, 100);
+  }
+
+  // Stop the timer
+  function stopTimer() {
+    clearInterval(timerInterval);
+  }
 
   // Check for matches
   function checkForMatch() {
@@ -90,7 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check if the game is over
     if (cardsWon.length === cardArray.length / 2) {
       resultDisplay.textContent = 'Congratulations! You found them all!';
-      calculateTime();
+      stopTimer(); // Stop the timer
+      calculateTime(); // Calculate the time when game is finished
     }
   }
 
