@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const playerName = nameInput.value || 'Player'; // Default name if none entered
     localStorage.setItem('playerName', playerName); // Save player name to localStorage
     startTime = Date.now(); // Record the start time
-    cardsChosen = []; // Reset the chosen cards
+    cardsChosen = []; // Reset the chosen cards 
     cardsChosenId = []; // Reset the chosen card IDs
     cardsWon = []; // Reset the won pairs
     resultDisplay.textContent = '0'; // Reset the score
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Calculate the time taken and display the player's level
   function calculateTime() {
     const timeTaken = (Date.now() - startTime) / 1000;
-    const level = timeTaken < 60 ? 'Master' : timeTaken < 120 ? 'Expert' : 'Beginner';
+    const level = timeTaken < 20 ? 'Master' : timeTaken < 40 ? 'Expert' : 'Beginner';
     messageDisplay.textContent = `You completed the game in ${timeTaken.toFixed(2)} seconds. Your level is: ${level}`; // Display message
   }
 
