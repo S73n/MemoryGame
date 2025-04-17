@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // List all card options
-  const cardArray = [
+  const easyModeCardArray = [
     { name: 'fries', img: 'images/fries.png' },
     { name: 'cheeseburger', img: 'images/cheeseburger.png' },
     { name: 'ice-cream', img: 'images/ice-cream.png' },
@@ -8,27 +7,50 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'milkshake', img: 'images/milkshake.png' },
     { name: 'hotdog', img: 'images/hotdog.png' },
     { name: 'fries', img: 'images/fries.png' },
+    { name: 'cheeseburger', img: 'images/cheeseburger.png' },
+    { name: 'ice-cream', img: 'images/ice-cream.png' },
+    { name: 'pizza', img: 'images/pizza.png' },
+    { name: 'milkshake', img: 'images/milkshake.png' },
+    { name: 'hotdog', img: 'images/hotdog.png' },
+  ];
+
+  const normalModeCardArray = [
+    { name: 'fries', img: 'images/fries.png' },
+    { name: 'cheeseburger', img: 'images/cheeseburger.png' },
+    { name: 'ice-cream', img: 'images/ice-cream.png' },
+    { name: 'pizza', img: 'images/pizza.png' },
+    { name: 'milkshake', img: 'images/milkshake.png' },
+    { name: 'hotdog', img: 'images/hotdog.png' },
+    { name: 'fries', img: 'images/fries.png' },
+    { name: 'cheeseburger', img: 'images/cheeseburger.png' },
+    { name: 'ice-cream', img: 'images/ice-cream.png' },
+    { name: 'pizza', img: 'images/pizza.png' },
+    { name: 'milkshake', img: 'images/milkshake.png' },
+    { name: 'hotdog', img: 'images/hotdog.png' },
     { name: 'osama', img: 'images/download.png' },
-    { name: 'cheeseburger', img: 'images/cheeseburger.png' },
-    { name: 'ice-cream', img: 'images/ice-cream.png' },
-    { name: 'pizza', img: 'images/pizza.png' },
-    { name: 'milkshake', img: 'images/milkshake.png' },
-    { name: 'hotdog', img: 'images/hotdog.png' },
     { name: 'osama', img: 'images/download.png' }
   ];
 
+  // Select DOM elements
   const grid = document.querySelector('.grid');
   const resultDisplay = document.querySelector('#result');
   const nameInput = document.querySelector('#name');
   const startButton = document.querySelector('#startButton');
   const timerDisplay = document.querySelector('#timer');  // Display the timer
   const messageDisplay = document.querySelector('#message'); // Message display area
-  
+
   let cardsChosen = [];
   let cardsChosenId = [];
   let cardsWon = [];
   let startTime = 0;
   let timerInterval;
+  let cardArray = [];  // This will hold the selected array of cards
+
+  // Retrieve the game mode from localStorage
+  const mode = localStorage.getItem('gameMode') || 'normal'; // Default to 'normal' mode if not set
+
+  // Set the appropriate card array based on the mode (either easy or normal)
+  cardArray = mode === 'easy' ? easyModeCardArray : normalModeCardArray;
 
   // Shuffle the cards randomly
   function shuffleCards() {
@@ -42,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Clear the existing grid
     grid.innerHTML = '';
 
-    // Create new cards
+    // Create new cards based on the length of the cardArray
     for (let i = 0; i < cardArray.length; i++) {
       const card = document.createElement('img');
       card.setAttribute('src', 'images/blank.png');
@@ -56,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
   startButton.addEventListener('click', () => {
     const playerName = nameInput.value || 'Player'; // Default name if none entered
     localStorage.setItem('playerName', playerName); // Save player name to localStorage
+    localStorage.setItem('gameMode', mode); // Save the game mode (easy or normal)
     startTime = Date.now(); // Record the start time
     cardsChosen = []; // Reset the chosen cards 
     cardsChosenId = []; // Reset the chosen card IDs

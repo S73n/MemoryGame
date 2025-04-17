@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Memory Game</title>
+  <title>Memory Game - Easy Mode</title>
   <link rel="stylesheet" href="style.css">
-  <script src="app.js" charset="utf-8" defer></script>
+  <script src="app.js" defer></script>
 </head>
 <body>
 
@@ -25,6 +25,22 @@
 
   <!-- Message Display Area -->
   <div id="message" style="margin-top: 20px; color: red;"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Retrieve the easy mode cards from localStorage
+      const easyModeCardArray = JSON.parse(localStorage.getItem('easyModeCards'));
+
+      if (easyModeCardArray) {
+        console.log('Easy Mode Cards:', easyModeCardArray);
+      } else {
+        console.log('No cards found in localStorage!');
+        // Handle the case where no cards are found
+      }
+
+      // Continue with your game logic, using easyModeCardArray to generate the grid, etc.
+    });
+  </script>
 
 </body>
 </html>

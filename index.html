@@ -43,10 +43,19 @@
   <button class="home" onclick="location.href='https://memoriagameyes.eu/';">h</button>
 
   <!-- Button to go to Easy Mode -->
-  <button class="easy-mode" onclick="location.href='easymode.html';">ez</button>
+  <button class="easy-mode" onclick="setGameMode('easy')">ez</button>
 
   <!-- Background image -->
   <img class="background" src="image.png">
+
+  <script>
+    // Function to set the game mode in localStorage
+    function setGameMode(mode) {
+      localStorage.setItem('gameMode', mode);
+      // Redirect to the easymode.html page
+      location.href = 'easymode.html';
+    }
+  </script>
 
 </body>
 </html>
