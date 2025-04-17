@@ -1,29 +1,52 @@
+<!DOCTYPE html>
 <html>
-    <button class="home" onclick="location.href='https://memoriagameyes.eu/';"></button>
-    <img class="background" src="image.png">
+<head>
+  <style>
+    /* Style for the background image */
+    .background {
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    img { 
+      width: 100%;
+      height: 100%;
+    }
+
+    /* General button styling */
+    button {
+      position: absolute;
+      width: 175px; /* 👈 Change width here */
+      height: 100px; /* 👈 Change height here */
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Positioning for the original "home" button */
+    .home {
+      top: 100px;   /* 👈 Change vertical position here */
+      left: 140px; /* 👈 Change horizontal position here */
+    }
+
+    /* Positioning for the "Go to Easy Mode" button */
+    .easy-mode {
+      top: 540px;  /* 👈 Change vertical position for easy mode button here */
+      left: 800px; /* 👈 Change horizontal position for easy mode button here */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Button to go to external Home page -->
+  <button class="home" onclick="location.href='https://memoriagameyes.eu/';">h</button>
+
+  <!-- Button to go to Easy Mode -->
+  <button class="easy-mode" onclick="location.href='easymode.html';">ez</button>
+
+  <!-- Background image -->
+  <img class="background" src="image.png">
+
+</body>
 </html>
-
-<style>
-.background {
-  width: 100%;
-  text-align: center;
-  font-size: 18px;
-}
-
-img { 
-  width: 100%;
-  height: 100%;
-}
-
-button{
-    position: absolute;
-    width: 175px;
-    height: 100px;
-    background:none;
-}
-
-.home{
-    top: 90px;
-    left: 140px;
-}
-</style>
