@@ -21,12 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'pizza', img: 'images/pizza.png' },
     { name: 'milkshake', img: 'images/milkshake.png' },
     { name: 'hotdog', img: 'images/hotdog.png' },
+    { name: 'spaghetti', img: 'images/spaghetti.png' },
     { name: 'fries', img: 'images/fries.png' },
     { name: 'cheeseburger', img: 'images/cheeseburger.png' },
     { name: 'ice-cream', img: 'images/ice-cream.png' },
     { name: 'pizza', img: 'images/pizza.png' },
     { name: 'milkshake', img: 'images/milkshake.png' },
     { name: 'hotdog', img: 'images/hotdog.png' },
+    { name: 'spaghetti', img: 'images/spaghetti.png' },
     { name: 'osama', img: 'images/download.png' },
     { name: 'osama', img: 'images/download.png' }
   ];
