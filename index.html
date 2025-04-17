@@ -35,6 +35,12 @@
       top: 540px;  /* 👈 Change vertical position for easy mode button here */
       left: 800px; /* 👈 Change horizontal position for easy mode button here */
     }
+
+    /* Positioning for the "Go to Normal Mode" button */
+    .normal-mode {
+      top: 740px;  /* 👈 Adjust this for normal mode button's position */
+      left: 800px; /* 👈 Adjust this for normal mode button's position */
+    }
   </style>
 </head>
 <body>
@@ -45,15 +51,22 @@
   <!-- Button to go to Easy Mode -->
   <button class="easy-mode" onclick="setGameMode('easy')">ez</button>
 
+  <!-- Button to go to Normal Mode -->
+  <button class="normal-mode" onclick="setGameMode('normal')">n</button>
+
   <!-- Background image -->
   <img class="background" src="image.png">
 
   <script>
-    // Function to set the game mode in localStorage
+    // Function to set the game mode in localStorage and redirect
     function setGameMode(mode) {
       localStorage.setItem('gameMode', mode);
-      // Redirect to the easymode.html page
-      location.href = 'easymode.html';
+      // Redirect to the appropriate game mode page
+      if (mode === 'easy') {
+        location.href = 'easymode.html'; // Redirect to Easy Mode
+      } else if (mode === 'normal') {
+        location.href = 'normalmode.html'; // Redirect to Normal Mode
+      }
     }
   </script>
 

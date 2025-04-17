@@ -1,1 +1,35 @@
-<!-- TO BE DONE -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Game - Normal Mode</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+
+  <h3>Score: <span id="result">0</span></h3>
+  <h3>Time: <span id="timer">0</span> seconds</h3>
+
+  <!-- Player's name input and start button -->
+  <div class="game-info">
+    <label for="name">Enter your name:</label>
+    <input type="text" id="name" placeholder="Enter your name">
+    <button id="startButton">Start Game</button>
+  </div>
+
+  <div class="grid">
+    <!-- Cards will be generated here dynamically -->
+  </div>
+
+  <!-- Message Display Area -->
+  <div id="message" style="margin-top: 20px; color: red;"></div>
+
+  <script>
+    // The game logic in app.js handles the game logic based on gameMode
+    // It will use normalModeCardArray when the gameMode is 'normal'
+  </script>
+
+</body>
+</html>
