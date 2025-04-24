@@ -83,6 +83,27 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'cake', img: 'images/cake.png' },
   ];
 
+  const minecraftModeCardArray = [
+    { name: 'A', img: 'images/EN_A.png' },
+    { name: 'c', img: 'images/EN_C.png' },
+    { name: 'D', img: 'images/EN_D.png' },
+    { name: 'H', img: 'images/EN_H.png' },
+    { name: 'L', img: 'images/EN_L.png' },
+    { name: 'N', img: 'images/EN_N.png' },
+    { name: 'Q', img: 'images/EN_Q.png' },
+    { name: 'T', img: 'images/EN_T.png' },
+    { name: 'X', img: 'images/EN_X.png' },
+    { name: 'A', img: 'images/EN_A.png' },
+    { name: 'c', img: 'images/EN_C.png' },
+    { name: 'D', img: 'images/EN_D.png' },
+    { name: 'H', img: 'images/EN_H.png' },
+    { name: 'L', img: 'images/EN_L.png' },
+    { name: 'N', img: 'images/EN_N.png' },
+    { name: 'Q', img: 'images/EN_Q.png' },
+    { name: 'T', img: 'images/EN_T.png' },
+    { name: 'X', img: 'images/EN_X.png' },
+  ];
+
   // Select DOM elements
   const grid = document.querySelector('.grid');
   const resultDisplay = document.querySelector('#result');
@@ -110,6 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
     cardArray = hardModeCardArray;
   } else if (mode === 'master') {
     cardArray = masterModeCardArray;
+  } else if (mode === 'minecraft') {
+    cardArray = minecraftModeCardArray;
   }
 
   // Shuffle the cards randomly

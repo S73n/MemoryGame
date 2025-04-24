@@ -48,6 +48,11 @@
       top: 1140px;
       left: 800px; 
     }
+
+    .minecraft-mode {
+      top: 740px;
+      left: 1570px; 
+    }
   </style>
 </head>
 <body>
@@ -62,6 +67,8 @@
 
   <button class="master-mode" onclick="setGameMode('master')">m</button>
 
+  <button class="minecraft-mode" onclick="setGameMode('minecraft')">m</button>
+
   <img class="background" src="image.png">
 
   <script>
@@ -75,6 +82,8 @@
         location.href = 'hardmode.html';
       } else if (mode === 'master') {
         location.href = 'mastermode.html';
+      } else if (mode === 'minecraft') {
+        location.href = 'minecraftmode.html';
       }
     }
   </script>
