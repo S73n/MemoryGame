@@ -42,6 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'hotdog', img: 'images/hotdog.png' },
     { name: 'spaghetti', img: 'images/spaghetti.png' },
     { name: 'osama', img: 'images/download.png' },
+    { name: 'taco', img: 'images/taco.png' },
+    { name: 'gummy bear', img: 'images/gummybear.png'},
     { name: 'fries', img: 'images/fries.png' },
     { name: 'cheeseburger', img: 'images/cheeseburger.png' },
     { name: 'ice-cream', img: 'images/ice-cream.png' },
@@ -50,6 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'hotdog', img: 'images/hotdog.png' },
     { name: 'spaghetti', img: 'images/spaghetti.png' },
     { name: 'osama', img: 'images/download.png' },
+    { name: 'taco', img: 'images/taco.png' },
+    { name: 'gummy bear', img: 'images/gummybear.png'},
   ];
 
   const masterModeCardArray = [
@@ -61,6 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'hotdog', img: 'images/hotdog.png' },
     { name: 'spaghetti', img: 'images/spaghetti.png' },
     { name: 'osama', img: 'images/download.png' },
+    { name: 'taco', img: 'images/taco.png' },
+    { name: 'gummy bear', img: 'images/gummybear.png'},
+    { name: 'green gummy bear', img: 'images/greengummybear.png'},
+    { name: 'cake', img: 'images/cake.png'},
     { name: 'fries', img: 'images/fries.png' },
     { name: 'cheeseburger', img: 'images/cheeseburger.png' },
     { name: 'ice-cream', img: 'images/ice-cream.png' },
@@ -69,6 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'hotdog', img: 'images/hotdog.png' },
     { name: 'spaghetti', img: 'images/spaghetti.png' },
     { name: 'osama', img: 'images/download.png' },
+    { name: 'taco', img: 'images/taco.png' },
+    { name: 'gummy bear', img: 'images/gummybear.png'},
+    { name: 'green gummy bear', img: 'images/greengummybear.png'},
+    { name: 'cake', img: 'images/cake.png'},
   ];
 
   // Select DOM elements
