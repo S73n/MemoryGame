@@ -24,48 +24,57 @@
       cursor: pointer;
     }
 
-    /* Positioning for the original "home" button */
     .home {
-      top: 100px;   /* 👈 Change vertical position here */
-      left: 140px; /* 👈 Change horizontal position here */
+      top: 100px;
+      left: 140px;
     }
 
-    /* Positioning for the "Go to Easy Mode" button */
     .easy-mode {
-      top: 540px;  /* 👈 Change vertical position for easy mode button here */
-      left: 800px; /* 👈 Change horizontal position for easy mode button here */
+      top: 540px;
+      left: 800px;
     }
 
-    /* Positioning for the "Go to Normal Mode" button */
     .normal-mode {
-      top: 740px;  /* 👈 Adjust this for normal mode button's position */
-      left: 800px; /* 👈 Adjust this for normal mode button's position */
+      top: 740px;
+      left: 800px; 
+    }
+
+    .hard-mode {
+      top: 940px;  
+      left: 800px; 
+    }
+
+    .master-mode {
+      top: 1140px;
+      left: 800px; 
     }
   </style>
 </head>
 <body>
 
-  <!-- Button to go to external Home page -->
   <button class="home" onclick="location.href='https://memoriagameyes.eu/';">h</button>
 
-  <!-- Button to go to Easy Mode -->
   <button class="easy-mode" onclick="setGameMode('easy')">ez</button>
 
-  <!-- Button to go to Normal Mode -->
   <button class="normal-mode" onclick="setGameMode('normal')">n</button>
 
-  <!-- Background image -->
+  <button class="hard-mode" onclick="setGameMode('hard')">h</button>
+
+  <button class="master-mode" onclick="setGameMode('master')">m</button>
+
   <img class="background" src="image.png">
 
   <script>
-    // Function to set the game mode in localStorage and redirect
     function setGameMode(mode) {
       localStorage.setItem('gameMode', mode);
-      // Redirect to the appropriate game mode page
       if (mode === 'easy') {
-        location.href = 'easymode.html'; // Redirect to Easy Mode
+        location.href = 'easymode.html';
       } else if (mode === 'normal') {
-        location.href = 'normalmode.html'; // Redirect to Normal Mode
+        location.href = 'normalmode.html';
+      } else if (mode === 'hard') {
+        location.href = 'hardmode.html';
+      } else if (mode === 'master') {
+        location.href = 'mastermode.html';
       }
     }
   </script>
