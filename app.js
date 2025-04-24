@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'spaghetti', img: 'images/spaghetti.png' },
     { name: 'osama', img: 'images/download.png' },
     { name: 'taco', img: 'images/taco.png' },
-    { name: 'gummy bear', img: 'images/gummybear.png'},
+    { name: 'gummy bear', img: 'images/gummybear.png' },
     { name: 'fries', img: 'images/fries.png' },
     { name: 'cheeseburger', img: 'images/cheeseburger.png' },
     { name: 'ice-cream', img: 'images/ice-cream.png' },
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'spaghetti', img: 'images/spaghetti.png' },
     { name: 'osama', img: 'images/download.png' },
     { name: 'taco', img: 'images/taco.png' },
-    { name: 'gummy bear', img: 'images/gummybear.png'},
+    { name: 'gummy bear', img: 'images/gummybear.png' },
   ];
 
   const masterModeCardArray = [
@@ -66,9 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'spaghetti', img: 'images/spaghetti.png' },
     { name: 'osama', img: 'images/download.png' },
     { name: 'taco', img: 'images/taco.png' },
-    { name: 'gummy bear', img: 'images/gummybear.png'},
-    { name: 'green gummy bear', img: 'images/greengummybear.png'},
-    { name: 'cake', img: 'images/cake.png'},
+    { name: 'gummy bear', img: 'images/gummybear.png' },
+    { name: 'green gummy bear', img: 'images/greengummybear.png' },
+    { name: 'cake', img: 'images/cake.png' },
     { name: 'fries', img: 'images/fries.png' },
     { name: 'cheeseburger', img: 'images/cheeseburger.png' },
     { name: 'ice-cream', img: 'images/ice-cream.png' },
@@ -78,9 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'spaghetti', img: 'images/spaghetti.png' },
     { name: 'osama', img: 'images/download.png' },
     { name: 'taco', img: 'images/taco.png' },
-    { name: 'gummy bear', img: 'images/gummybear.png'},
-    { name: 'green gummy bear', img: 'images/greengummybear.png'},
-    { name: 'cake', img: 'images/cake.png'},
+    { name: 'gummy bear', img: 'images/gummybear.png' },
+    { name: 'green gummy bear', img: 'images/greengummybear.png' },
+    { name: 'cake', img: 'images/cake.png' },
   ];
 
   // Select DOM elements
@@ -101,8 +101,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // Retrieve the game mode from localStorage
   const mode = localStorage.getItem('gameMode') || 'normal'; // Default to 'normal' mode if not set
 
-  // Set the appropriate card array based on the mode (either easy or normal)
-  cardArray = mode === 'easy' ? easyModeCardArray : normalModeCardArray;
+  // Set the appropriate card array based on the mode (either easy, normal, hard, or master)
+  if (mode === 'easy') {
+    cardArray = easyModeCardArray;
+  } else if (mode === 'normal') {
+    cardArray = normalModeCardArray;
+  } else if (mode === 'hard') {
+    cardArray = hardModeCardArray;
+  } else if (mode === 'master') {
+    cardArray = masterModeCardArray;
+  }
 
   // Shuffle the cards randomly
   function shuffleCards() {
@@ -124,15 +132,19 @@ document.addEventListener('DOMContentLoaded', () => {
       card.addEventListener('click', flipCard);
       grid.appendChild(card);
     }
+
+    // Adjust grid size based on the number of cards
+    const columns = Math.sqrt(cardArray.length);
+    grid.style.gridTemplateColumns = `repeat(${columns}, 1fr)`; // Make grid responsive
   }
 
   // Start a new game
   startButton.addEventListener('click', () => {
     const playerName = nameInput.value || 'Player'; // Default name if none entered
     localStorage.setItem('playerName', playerName); // Save player name to localStorage
-    localStorage.setItem('gameMode', mode); // Save the game mode (easy or normal)
+    localStorage.setItem('gameMode', mode); // Save the game mode (easy, normal, hard, master)
     startTime = Date.now(); // Record the start time
-    cardsChosen = []; // Reset the chosen cards 
+    cardsChosen = []; // Reset the chosen cards
     cardsChosenId = []; // Reset the chosen card IDs
     cardsWon = []; // Reset the won pairs
     resultDisplay.textContent = '0'; // Reset the score
@@ -144,7 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Start the timer
   function startTimer() {
-    // Clear any existing intervals
     clearInterval(timerInterval);
     timerInterval = setInterval(() => {
       const timeElapsed = (Date.now() - startTime) / 1000; // Time in seconds
