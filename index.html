@@ -2,7 +2,7 @@
 <html>
 <head>
   <style>
-    /* Style for the background image */
+
     .background {
       width: 100%;
       text-align: center;
@@ -14,11 +14,10 @@
       height: 100%;
     }
 
-    /* General button styling */
     button {
       position: absolute;
-      width: 175px; /* 👈 Change width here */
-      height: 100px; /* 👈 Change height here */
+      width: 175px;
+      height: 100px;
       background: none;
       border: none;
       cursor: pointer;
@@ -67,6 +66,11 @@
   </style>
 </head>
 <body>
+
+  <audio id="background-music" autoplay loop>
+    <source src="elevatormusic.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
 
   <button class="home" onclick="location.href='https://memoriagameyes.eu/';">h</button>
 
