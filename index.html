@@ -59,6 +59,11 @@
       left: 1570px; 
     }
 
+    .symbols-mode {
+      top: 940px;
+      left: 1570px; 
+    }
+
   </style>
 </head>
 <body>
@@ -77,6 +82,8 @@
 
   <button class="chinese-mode" onclick="setGameMode('chinese')">c</button>
 
+  <button class="symbols-mode" onclick="setGameMode('symbols')">s</button>
+
   <img class="background" src="image.png">
 
   <script>
@@ -94,6 +101,8 @@
         location.href = 'minecraftmode.html';
       } else if (mode === 'chinese') {
         location.href = 'chinesemode.html';
+      } else if (mode === 'symbols') {
+        location.href = 'symbolsmode.html';
       }
     }
   </script>
