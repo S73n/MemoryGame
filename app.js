@@ -105,7 +105,20 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const chineseModeCardArray = [
-
+    { name: 'hiina1', img: 'images/C_2.png' },
+    { name: 'hiina2', img: 'images/C_3.png' },
+    { name: 'hiina3', img: 'images/C_4.png' },
+    { name: 'hiina4', img: 'images/C_5.png' },
+    { name: 'hiina5', img: 'images/C_6.png' },
+    { name: 'hiina6', img: 'images/C_7.png' },
+    { name: 'hiina7', img: 'images/C_8.png' },
+    { name: 'hiina1', img: 'images/C_2.png' },
+    { name: 'hiina2', img: 'images/C_3.png' },
+    { name: 'hiina3', img: 'images/C_4.png' },
+    { name: 'hiina4', img: 'images/C_5.png' },
+    { name: 'hiina5', img: 'images/C_6.png' },
+    { name: 'hiina6', img: 'images/C_7.png' },
+    { name: 'hiina7', img: 'images/C_8.png' },
   ];
 
   const symbolsModeCardArray = [
