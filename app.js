@@ -122,7 +122,18 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const symbolsModeCardArray = [
-
+    { name: 'symbol1', img: 'images/S_1.png' },
+    { name: 'symbol2', img: 'images/S_2.png' },
+    { name: 'symbol3', img: 'images/S_3.png' },
+    { name: 'symbol4', img: 'images/S_4.png' },
+    { name: 'symbol5', img: 'images/S_5.png' },
+    { name: 'symbol6', img: 'images/S_6.png' },
+    { name: 'symbol1', img: 'images/S_1.png' },
+    { name: 'symbol2', img: 'images/S_2.png' },
+    { name: 'symbol3', img: 'images/S_3.png' },
+    { name: 'symbol4', img: 'images/S_4.png' },
+    { name: 'symbol5', img: 'images/S_5.png' },
+    { name: 'symbol6', img: 'images/S_6.png' },
   ];
 
   // Select DOM elements
