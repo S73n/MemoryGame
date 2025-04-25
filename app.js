@@ -104,6 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'X', img: 'images/EN_X.png' },
   ];
 
+  const chineseModeCardArray = [
+
+  ];
+
   // Select DOM elements
   const grid = document.querySelector('.grid');
   const resultDisplay = document.querySelector('#result');
@@ -133,6 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
     cardArray = masterModeCardArray;
   } else if (mode === 'minecraft') {
     cardArray = minecraftModeCardArray;
+  } else if (mode === 'chinese') {
+    cardArray = chineseModeCardArray;
   }
 
   // Shuffle the cards randomly

@@ -69,6 +69,8 @@
 
   <button class="minecraft-mode" onclick="setGameMode('minecraft')">m</button>
 
+  <button class="chinese-mode" onclick="setGameMode('chinese')">c</button>
+
   <img class="background" src="image.png">
 
   <script>
@@ -84,6 +86,8 @@
         location.href = 'mastermode.html';
       } else if (mode === 'minecraft') {
         location.href = 'minecraftmode.html';
+      } else if (mode === 'chinese') {
+        location.href = 'chinesemode.html';
       }
     }
   </script>

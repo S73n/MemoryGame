@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory Game - Chinese Mode</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    localStorage.setItem('gameMode', 'chinese');
+  </script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+
+  <h3>Score: <span id="result">0</span></h3>
+  <h3>Time: <span id="timer">0</span> seconds</h3>
+
+  <div class="game-info">
+    <label for="name">Enter your name:</label>
+    <input type="text" id="name" placeholder="Enter your name" />
+    <button id="startButton">Start Game</button>
+  </div>
+
+  <div class="grid"></div>
+
+  <div id="message" style="margin-top: 160px; color: red;"></div>
+
+</body>
+</html>
