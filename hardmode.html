@@ -27,3 +27,34 @@
 
 </body>
 </html>
+
+<audio id="background-music" loop>
+  <source src="audio/elevatormusic.mp3" type="audio/mp3">
+</audio>
+
+<button id="music-toggle" style="position: absolute; top: 10px; left: 10px;">
+  Toggle Music
+</button>
+
+<script>
+  const music = document.getElementById('background-music');
+  const toggle = document.getElementById('music-toggle');
+
+  // Try to play music if it was on last time
+  window.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('musicOn') === 'true') {
+      music.play().catch(() => {}); // avoid autoplay error
+    }
+  });
+
+  // Toggle on click
+  toggle.addEventListener('click', () => {
+    if (music.paused) {
+      music.play();
+      localStorage.setItem('musicOn', 'true');
+    } else {
+      music.pause();
+      localStorage.setItem('musicOn', 'false');
+    }
+  });
+</script>
