@@ -68,9 +68,11 @@
 <body>
 
   <audio id="background-music" autoplay loop>
-    <source src="elevatormusic.mp3" type="audio/mp3">
+    <source src="audio/elevatormusic.mp3" type="audio/mp3"> 
     Your browser does not support the audio element.
-  </audio>
+  </audio> 
+ 
+  <button id="play-music">Play Music</button>
 
   <button class="home" onclick="location.href='https://memoriagameyes.eu/';">h</button>
 
@@ -109,6 +111,12 @@
         location.href = 'symbolsmode.html';
       }
     }
+
+    document.getElementById('play-music').addEventListener('click', function() {
+      const music = document.getElementById('background-music');
+      music.play();
+      this.style.display = 'none';
+    }); // muusika nupp
   </script>
 
 </body>
