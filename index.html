@@ -63,6 +63,11 @@
       left: 1570px; 
     }
 
+    .costumepictures_mode {
+      top: 1140px;
+      left: 1570px; 
+    }
+
   </style>
 </head>
 <body>
@@ -85,6 +90,8 @@
 
   <button class="symbols-mode" onclick="setGameMode('symbols')">s</button>
 
+  <button class="costumepictures_mode" onclick="setGameMode('costumepictures')">s</button>
+
   <img class="background" src="image.png">
 
   <script>
@@ -104,6 +111,8 @@
         location.href = 'chinesemode.html';
       } else if (mode === 'symbols') {
         location.href = 'symbolsmode.html';
+      } else if (mode === 'costumepictures') {
+        location.href = 'costumepicturesmode.html';
       }
     }
 

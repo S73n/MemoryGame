@@ -136,6 +136,32 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'symbol6', img: 'images/S_6.png' },
   ];
 
+  const costumepicturesModeCardArray = [];
+
+  window.uploadImages = function() {
+    const input = document.getElementById('imageUpload');
+    const files = input.files;
+  
+    if (files.length > 0) {
+      Array.from(files).forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const imageUrl = e.target.result;
+  
+          costumepicturesModeCardArray.push(
+            { name: 'custom' + index, img: imageUrl },
+            { name: 'custom' + index, img: imageUrl }
+          );
+  
+          console.log("Updated array:", costumepicturesModeCardArray);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  };
+  
+  
+
   // Select DOM elements
   const grid = document.querySelector('.grid');
   const resultDisplay = document.querySelector('#result');
@@ -169,7 +195,9 @@ document.addEventListener('DOMContentLoaded', () => {
     cardArray = chineseModeCardArray;
   } else if (mode === 'symbols') {
     cardArray = symbolsModeCardArray;
-  }
+  } else if (mode === 'costumepictures') {
+  cardArray = costumepicturesModeCardArray;
+}
 
   // Shuffle the cards randomly
   function shuffleCards() {
