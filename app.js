@@ -142,15 +142,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('imageUpload');
     const files = input.files;
   
+    let startingIndex = costumepicturesModeCardArray.length / 2;
+  
     if (files.length > 0) {
-      Array.from(files).forEach((file, index) => {
+      Array.from(files).forEach((file, i) => {
         const reader = new FileReader();
         reader.onload = function (e) {
           const imageUrl = e.target.result;
+          const uniqueName = 'custom' + (startingIndex + i);
   
           costumepicturesModeCardArray.push(
-            { name: 'custom' + index, img: imageUrl },
-            { name: 'custom' + index, img: imageUrl }
+            { name: uniqueName, img: imageUrl },
+            { name: uniqueName, img: imageUrl }
           );
   
           console.log("Updated array:", costumepicturesModeCardArray);
@@ -159,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   };
+  
   
   
 
