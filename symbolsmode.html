@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Memory Game - Easy Mode</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory Game - Symbols Mode</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    localStorage.setItem('gameMode', 'symbols');
+  </script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -14,36 +17,16 @@
 
   <div class="game-info">
     <label for="name">Enter your name:</label>
-    <input type="text" id="name" placeholder="Enter your name">
+    <input type="text" id="name" placeholder="Enter your name" />
     <button id="startButton">Start Game</button>
   </div>
 
-  <div class="grid">
-    <!-- Cards will be generated here dynamically -->
-  </div>
+  <div class="grid"></div>
 
-  <!-- Message Display Area -->
-  <div id="message" style="margin-top: 20px; color: red;"></div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Retrieve the easy mode cards from localStorage
-      const easyModeCardArray = JSON.parse(localStorage.getItem('easyModeCards'));
-
-      if (easyModeCardArray) {
-        console.log('Easy Mode Cards:', easyModeCardArray);
-      } else {
-        console.log('No cards found in localStorage!');
-        // Handle the case where no cards are found
-      }
-
-      // Continue with your game logic, using easyModeCardArray to generate the grid, etc.
-    });
-  </script>
+  <div id="message" style="margin-top: 160px; color: red;"></div>
 
 </body>
 </html>
-
 <audio id="background-music" loop>
   <source src="audio/elevatormusic.mp3" type="audio/mp3">
 </audio>

@@ -83,6 +83,89 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'cake', img: 'images/cake.png' },
   ];
 
+  const minecraftModeCardArray = [
+    { name: 'A', img: 'images/EN_A.png' },
+    { name: 'c', img: 'images/EN_C.png' },
+    { name: 'D', img: 'images/EN_D.png' },
+    { name: 'H', img: 'images/EN_H.png' },
+    { name: 'L', img: 'images/EN_L.png' },
+    { name: 'N', img: 'images/EN_N.png' },
+    { name: 'Q', img: 'images/EN_Q.png' },
+    { name: 'T', img: 'images/EN_T.png' },
+    { name: 'X', img: 'images/EN_X.png' },
+    { name: 'A', img: 'images/EN_A.png' },
+    { name: 'c', img: 'images/EN_C.png' },
+    { name: 'D', img: 'images/EN_D.png' },
+    { name: 'H', img: 'images/EN_H.png' },
+    { name: 'L', img: 'images/EN_L.png' },
+    { name: 'N', img: 'images/EN_N.png' },
+    { name: 'Q', img: 'images/EN_Q.png' },
+    { name: 'T', img: 'images/EN_T.png' },
+    { name: 'X', img: 'images/EN_X.png' },
+  ];
+
+  const chineseModeCardArray = [
+    { name: 'hiina1', img: 'images/C_2.png' },
+    { name: 'hiina2', img: 'images/C_3.png' },
+    { name: 'hiina3', img: 'images/C_4.png' },
+    { name: 'hiina4', img: 'images/C_5.png' },
+    { name: 'hiina5', img: 'images/C_6.png' },
+    { name: 'hiina6', img: 'images/C_7.png' },
+    { name: 'hiina7', img: 'images/C_8.png' },
+    { name: 'hiina1', img: 'images/C_2.png' },
+    { name: 'hiina2', img: 'images/C_3.png' },
+    { name: 'hiina3', img: 'images/C_4.png' },
+    { name: 'hiina4', img: 'images/C_5.png' },
+    { name: 'hiina5', img: 'images/C_6.png' },
+    { name: 'hiina6', img: 'images/C_7.png' },
+    { name: 'hiina7', img: 'images/C_8.png' },
+  ];
+
+  const symbolsModeCardArray = [
+    { name: 'symbol1', img: 'images/S_1.png' },
+    { name: 'symbol2', img: 'images/S_2.png' },
+    { name: 'symbol3', img: 'images/S_3.png' },
+    { name: 'symbol4', img: 'images/S_4.png' },
+    { name: 'symbol5', img: 'images/S_5.png' },
+    { name: 'symbol6', img: 'images/S_6.png' },
+    { name: 'symbol1', img: 'images/S_1.png' },
+    { name: 'symbol2', img: 'images/S_2.png' },
+    { name: 'symbol3', img: 'images/S_3.png' },
+    { name: 'symbol4', img: 'images/S_4.png' },
+    { name: 'symbol5', img: 'images/S_5.png' },
+    { name: 'symbol6', img: 'images/S_6.png' },
+  ];
+
+  const costumepicturesModeCardArray = [];
+
+  window.uploadImages = function() {
+    const input = document.getElementById('imageUpload');
+    const files = input.files;
+  
+    let startingIndex = costumepicturesModeCardArray.length / 2;
+  
+    if (files.length > 0) {
+      Array.from(files).forEach((file, i) => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const imageUrl = e.target.result;
+          const uniqueName = 'custom' + (startingIndex + i);
+  
+          costumepicturesModeCardArray.push(
+            { name: uniqueName, img: imageUrl },
+            { name: uniqueName, img: imageUrl }
+          );
+  
+          console.log("Updated array:", costumepicturesModeCardArray);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  };
+  
+  
+  
+
   // Select DOM elements
   const grid = document.querySelector('.grid');
   const resultDisplay = document.querySelector('#result');
@@ -110,7 +193,15 @@ document.addEventListener('DOMContentLoaded', () => {
     cardArray = hardModeCardArray;
   } else if (mode === 'master') {
     cardArray = masterModeCardArray;
-  }
+  } else if (mode === 'minecraft') {
+    cardArray = minecraftModeCardArray;
+  } else if (mode === 'chinese') {
+    cardArray = chineseModeCardArray;
+  } else if (mode === 'symbols') {
+    cardArray = symbolsModeCardArray;
+  } else if (mode === 'costumepictures') {
+  cardArray = costumepicturesModeCardArray;
+}
 
   // Shuffle the cards randomly
   function shuffleCards() {

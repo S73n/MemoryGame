@@ -2,7 +2,7 @@
 <html>
 <head>
   <style>
-    /* Style for the background image */
+
     .background {
       width: 100%;
       text-align: center;
@@ -10,11 +10,18 @@
     }
 
 
+<<<<<<< HEAD
     /* General button styling */
     button, .modes, .spmodes {
       position: absolute;
       width: 310px; /* 👈 Change width here */
       height: 84px; /* 👈 Change height here */
+=======
+    button {
+      position: absolute;
+      width: 175px;
+      height: 100px;
+>>>>>>> cb527e69574efaaa938a6c0be2191f2088379441
       background: none;
       background-repeat: no-repeat;
       border: none;
@@ -102,11 +109,38 @@
       background-size: 100%, 100%;
       background-repeat: no-repeat;
     }
+
+    .minecraft-mode {
+      top: 740px;
+      left: 1570px; 
+    }
+    
+    .chinese-mode {
+      top: 540px;
+      left: 1570px; 
+    }
+
+    .symbols-mode {
+      top: 940px;
+      left: 1570px; 
+    }
+
+    .costumepictures_mode {
+      top: 1140px;
+      left: 1570px; 
+    }
+
   </style>
 </head>
 <body>
 
+<<<<<<< HEAD
   <img src="buttonimg/memoriagame.png" class="memoriagame">
+=======
+ 
+
+  <button class="home" onclick="location.href='https://memoriagameyes.eu/';">h</button>
+>>>>>>> cb527e69574efaaa938a6c0be2191f2088379441
 
   <img src="buttonimg/normalgamemodes.png" class="modes">
   <img src="buttonimg/specialgamemodes.png" class="spmodes">
@@ -117,6 +151,7 @@
 
   <button class="normal-mode" onclick="setGameMode('normal')"></button>
 
+<<<<<<< HEAD
   <button class="hard-mode" onclick="setGameMode('hard')"></button>
 
   <button class="master-mode" onclick="setGameMode('master')"></button>
@@ -128,6 +163,17 @@
   <button class="symbol-mode" onclick="setGameMode('symbol')"></button>
 
   <button class="custom-mode" onclick="setGameMode('custom')"></button>
+=======
+  <button class="minecraft-mode" onclick="setGameMode('minecraft')">m</button>
+
+  <button class="chinese-mode" onclick="setGameMode('chinese')">c</button>
+
+  <button class="symbols-mode" onclick="setGameMode('symbols')">s</button>
+
+  <button class="costumepictures_mode" onclick="setGameMode('costumepictures')">s</button>
+
+  <img class="background" src="image.png">
+>>>>>>> cb527e69574efaaa938a6c0be2191f2088379441
 
   <script>
     function setGameMode(mode) {
@@ -140,9 +186,50 @@
         location.href = 'hardmode.html';
       } else if (mode === 'master') {
         location.href = 'mastermode.html';
+      } else if (mode === 'minecraft') {
+        location.href = 'minecraftmode.html';
+      } else if (mode === 'chinese') {
+        location.href = 'chinesemode.html';
+      } else if (mode === 'symbols') {
+        location.href = 'symbolsmode.html';
+      } else if (mode === 'costumepictures') {
+        location.href = 'costumepicturesmode.html';
       }
     }
+
+
   </script>
 
 </body>
 </html>
+
+<audio id="background-music" loop>
+  <source src="audio/elevatormusic.mp3" type="audio/mp3">
+</audio>
+
+<button id="music-toggle" style="position: absolute; top: 10px; left: 10px;">
+  Toggle Music
+</button>
+
+<script>
+  const music = document.getElementById('background-music');
+  const toggle = document.getElementById('music-toggle');
+
+  // Try to play music if it was on last time
+  window.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('musicOn') === 'true') {
+      music.play().catch(() => {}); // avoid autoplay error
+    }
+  });
+
+  // Toggle on click
+  toggle.addEventListener('click', () => {
+    if (music.paused) {
+      music.play();
+      localStorage.setItem('musicOn', 'true');
+    } else {
+      music.pause();
+      localStorage.setItem('musicOn', 'false');
+    }
+  });
+</script>
