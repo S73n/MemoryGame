@@ -9,60 +9,125 @@
       font-size: 18px;
     }
 
-    img { 
-      width: 100%;
-      height: 100%;
-    }
 
     /* General button styling */
-    button {
+    button, .modes, .spmodes {
       position: absolute;
-      width: 175px; /* 👈 Change width here */
-      height: 100px; /* 👈 Change height here */
+      width: 310px; /* 👈 Change width here */
+      height: 84px; /* 👈 Change height here */
       background: none;
+      background-repeat: no-repeat;
       border: none;
       cursor: pointer;
     }
 
-    .home {
+    .memoriagame{
+      position: absolute;
+      left: 850px;
       top: 100px;
-      left: 140px;
+    }
+
+    .modes {
+      left: 675px;
+      top: 340px;
+      width: 423px;
+      height: 126px;
+    }
+
+    .spmodes{
+      top: 340px;
+      left: 1400px;
+      width: 423px;
+      height: 126px;
+    }
+
+    .home {
+      width: 258px;
+      height: 79px;
+      top: 80px;
+      left: 100px;
+      background-image: url(buttonimg/homebutton.png);
     }
 
     .easy-mode {
-      top: 540px;
-      left: 800px;
+      top: 550px;
+      left: 740px;
+      background-image: url(buttonimg/easybutton.png);
     }
 
     .normal-mode {
-      top: 740px;
-      left: 800px; 
+      top: 700px;
+      left: 740px; 
+      background-image: url(buttonimg/mediumbutton.png);
     }
 
     .hard-mode {
-      top: 940px;  
-      left: 800px; 
+      top: 850px;  
+      left: 740px;
+      background-image: url(buttonimg/hardbutton.png); 
     }
 
     .master-mode {
-      top: 1140px;
-      left: 800px; 
+      top: 1000px;
+      left: 740px; 
+      background-image: url(buttonimg/masterbutton.png);
+    }
+
+    .chinese-mode{
+      top: 550px;
+      left: 1450px;
+      background-image: url(buttonimg/chinesebutton.png);
+    }
+
+    .minecraft-mode{
+      top: 700px;
+      left: 1450px;
+      background-image: url(buttonimg/minecraftbutton.png);
+    }
+
+    .symbol-mode{
+      top: 850px;
+      left: 1450px;
+      background-image: url(buttonimg/signsbutton.png);
+    }
+
+    .custom-mode{
+      top: 1000px;
+      left: 1450px;
+      background-image: url(buttonimg/custombutton.png);
+    }
+
+    html{
+      background-image: url(solid.png);
+      background-size: 100%, 100%;
+      background-repeat: no-repeat;
     }
   </style>
 </head>
 <body>
 
-  <button class="home" onclick="location.href='https://memoriagameyes.eu/';">h</button>
+  <img src="buttonimg/memoriagame.png" class="memoriagame">
 
-  <button class="easy-mode" onclick="setGameMode('easy')">ez</button>
+  <img src="buttonimg/normalgamemodes.png" class="modes">
+  <img src="buttonimg/specialgamemodes.png" class="spmodes">
 
-  <button class="normal-mode" onclick="setGameMode('normal')">n</button>
+  <button class="home" onclick="location.href='https://memoriagameyes.eu/';"></button>
 
-  <button class="hard-mode" onclick="setGameMode('hard')">h</button>
+  <button class="easy-mode" onclick="setGameMode('easy')"></button>
 
-  <button class="master-mode" onclick="setGameMode('master')">m</button>
+  <button class="normal-mode" onclick="setGameMode('normal')"></button>
 
-  <img class="background" src="image.png">
+  <button class="hard-mode" onclick="setGameMode('hard')"></button>
+
+  <button class="master-mode" onclick="setGameMode('master')"></button>
+
+  <button class="chinese-mode" onclick="setGameMode('chinese')"></button>
+
+  <button class="minecraft-mode" onclick="setGameMode('minecraft')"></button>
+
+  <button class="symbol-mode" onclick="setGameMode('symbol')"></button>
+
+  <button class="custom-mode" onclick="setGameMode('custom')"></button>
 
   <script>
     function setGameMode(mode) {
