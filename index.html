@@ -1,189 +1,164 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memoria Game</title>
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    .background {
+    html, body {
       width: 100%;
-      text-align: center;
-      font-size: 18px;
-    }
-
-    /* General button styling */
-    button, .modes, .spmodes {
-      position: absolute;
-      width: 310px; /* 👈 Change width here */
-      height: 84px; /* 👈 Change height here */
-      background: none;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url('solid.png');
+      background-size: cover;
       background-repeat: no-repeat;
-      border: none;
-      cursor: pointer;
+      overflow: hidden;
     }
 
-    .memoriagame{
+    .memoriagame {
       position: absolute;
-      left: 850px;
-      top: 100px;
+      left: 50%;
+      top: 5%;
+      transform: translateX(-50%);
+      max-width: 400px;
+    }
+
+    .modes, .spmodes {
+      position: absolute;
+      width: 423px;
+      height: auto;
     }
 
     .modes {
-      left: 675px;
-      top: 340px;
-      width: 423px;
-      height: 126px;
+      top: 20%;
+      left: 15%;
     }
 
-    .spmodes{
-      top: 340px;
-      left: 1400px;
-      width: 423px;
-      height: 126px;
+    .spmodes {
+      top: 20%;
+      right: 15%;
+    }
+
+    button {
+      position: absolute;
+      width: 310px;
+      height: 84px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border-radius: 12px;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     }
 
     .home {
-      width: 258px;
-      height: 79px;
-      top: 80px;
-      left: 100px;
-      background-image: url(buttonimg/homebutton.png);
+      top: 3%;
+      left: 3%;
+      width: 200px;
+      height: 60px;
+      background-image: url('buttonimg/homebutton.png');
     }
 
-    .easy-mode {
-      top: 550px;
-      left: 740px;
-      background-image: url(buttonimg/easybutton.png);
+    .easy-mode    { top: 38%; left: 17%; background-image: url('buttonimg/easybutton.png'); }
+    .normal-mode  { top: 48%; left: 17%; background-image: url('buttonimg/mediumbutton.png'); }
+    .hard-mode    { top: 58%; left: 17%; background-image: url('buttonimg/hardbutton.png'); }
+    .master-mode  { top: 68%; left: 17%; background-image: url('buttonimg/masterbutton.png'); }
+
+    .chinese-mode  { top: 38%; right: 17%; background-image: url('buttonimg/chinesebutton.png'); }
+    .minecraft-mode{ top: 48%; right: 17%; background-image: url('buttonimg/minecraftbutton.png'); }
+    .symbol-mode   { top: 58%; right: 17%; background-image: url('buttonimg/signsbutton.png'); }
+    .custom-mode   { top: 68%; right: 17%; background-image: url('buttonimg/custombutton.png'); }
+
+    /* Music Button */
+    #music-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 16px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
-    .normal-mode {
-      top: 700px;
-      left: 740px; 
-      background-image: url(buttonimg/mediumbutton.png);
+    #music-toggle:hover {
+      background-color: rgba(255, 255, 255, 1);
     }
-
-    .hard-mode {
-      top: 850px;  
-      left: 740px;
-      background-image: url(buttonimg/hardbutton.png); 
-    }
-
-    .master-mode {
-      top: 1000px;
-      left: 740px; 
-      background-image: url(buttonimg/masterbutton.png);
-    }
-
-    .chinese-mode{
-      top: 550px;
-      left: 1450px;
-      background-image: url(buttonimg/chinesebutton.png);
-    }
-
-    .minecraft-mode{
-      top: 700px;
-      left: 1450px;
-      background-image: url(buttonimg/minecraftbutton.png);
-    }
-
-    .symbol-mode{
-      top: 850px;
-      left: 1450px;
-      background-image: url(buttonimg/signsbutton.png);
-    }
-
-    .custom-mode{
-      top: 1000px;
-      left: 1450px;
-      background-image: url(buttonimg/custombutton.png);
-    }
-
-    html{
-      background-image: url(solid.png);
-      background-size: 100%, 100%;
-      background-repeat: no-repeat;
-    }
-
   </style>
 </head>
 <body>
 
-  <img src="buttonimg/memoriagame.png" class="memoriagame">
-  <img src="buttonimg/normalgamemodes.png" class="modes">
-  <img src="buttonimg/specialgamemodes.png" class="spmodes">
+  <!-- Logos -->
+  <img src="buttonimg/memoriagame.png" class="memoriagame" alt="Memoria Game Logo">
+  <img src="buttonimg/normalgamemodes.png" class="modes" alt="Normal Modes">
+  <img src="buttonimg/specialgamemodes.png" class="spmodes" alt="Special Modes">
 
-  <button class="home" onclick="location.href='https://memoriagameyes.eu/';"></button>
-
+  <!-- Buttons -->
+  <button class="home" onclick="location.href='https://memoriagameyes.eu/'"></button>
   <button class="easy-mode" onclick="setGameMode('easy')"></button>
-
   <button class="normal-mode" onclick="setGameMode('normal')"></button>
-
   <button class="hard-mode" onclick="setGameMode('hard')"></button>
-
   <button class="master-mode" onclick="setGameMode('master')"></button>
-
   <button class="chinese-mode" onclick="setGameMode('chinese')"></button>
-
   <button class="minecraft-mode" onclick="setGameMode('minecraft')"></button>
-
   <button class="symbol-mode" onclick="setGameMode('symbols')"></button>
-
   <button class="custom-mode" onclick="setGameMode('custompictures')"></button>
 
+  <!-- Music Toggle -->
+  <audio id="background-music" loop>
+    <source src="audio/elevatormusic.mp3" type="audio/mp3">
+  </audio>
+  <button id="music-toggle">Toggle Music</button>
 
   <script>
     function setGameMode(mode) {
       localStorage.setItem('gameMode', mode);
-      if (mode === 'easy') {
-        location.href = 'easymode.html';
-      } else if (mode === 'normal') {
-        location.href = 'normalmode.html';
-      } else if (mode === 'hard') {
-        location.href = 'hardmode.html';
-      } else if (mode === 'master') {
-        location.href = 'mastermode.html';
-      } else if (mode === 'minecraft') {
-        location.href = 'minecraftmode.html';
-      } else if (mode === 'chinese') {
-        location.href = 'chinesemode.html';
-      } else if (mode === 'symbols') {
-        location.href = 'symbolsmode.html';
-      } else if (mode === 'costumepictures') {
-        location.href = 'costumepicturesmode.html';
+      const pages = {
+        easy: 'easymode.html',
+        normal: 'normalmode.html',
+        hard: 'hardmode.html',
+        master: 'mastermode.html',
+        chinese: 'chinesemode.html',
+        minecraft: 'minecraftmode.html',
+        symbols: 'symbolsmode.html',
+        custompictures: 'costumepicturesmode.html'
+      };
+      if (pages[mode]) {
+        location.href = pages[mode];
       }
     }
 
+    const music = document.getElementById('background-music');
+    const toggle = document.getElementById('music-toggle');
 
+    window.addEventListener('DOMContentLoaded', () => {
+      if (localStorage.getItem('musicOn') === 'true') {
+        music.play().catch(() => {});
+      }
+    });
+
+    toggle.addEventListener('click', () => {
+      if (music.paused) {
+        music.play();
+        localStorage.setItem('musicOn', 'true');
+      } else {
+        music.pause();
+        localStorage.setItem('musicOn', 'false');
+      }
+    });
   </script>
-
 </body>
 </html>
-
-<audio id="background-music" loop>
-  <source src="audio/elevatormusic.mp3" type="audio/mp3">
-</audio>
-
-<button id="music-toggle" style="position: absolute; top: 10px; left: 10px;">
-  Toggle Music
-</button>
-
-<script>
-  const music = document.getElementById('background-music');
-  const toggle = document.getElementById('music-toggle');
-
-  // Try to play music if it was on last time
-  window.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('musicOn') === 'true') {
-      music.play().catch(() => {}); // avoid autoplay error
-    }
-  });
-
-  // Toggle on click
-  toggle.addEventListener('click', () => {
-    if (music.paused) {
-      music.play();
-      localStorage.setItem('musicOn', 'true');
-    } else {
-      music.pause();
-      localStorage.setItem('musicOn', 'false');
-    }
-  });
-</script>
