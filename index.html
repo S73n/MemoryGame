@@ -70,6 +70,14 @@
       background-image: url('buttonimg/homebutton.png');
     }
 
+    .supersecretgame{
+      top: 65%;
+      left: 45%;
+      width: 50px;
+      height: 50px;
+      background-color: transparent;
+    }
+
     .easy-mode    { top: 38%; left: 17%; background-image: url('buttonimg/easybutton.png'); }
     .normal-mode  { top: 48%; left: 17%; background-image: url('buttonimg/mediumbutton.png'); }
     .hard-mode    { top: 58%; left: 17%; background-image: url('buttonimg/hardbutton.png'); }
@@ -116,6 +124,7 @@
   <button class="minecraft-mode" onclick="setGameMode('minecraft')"></button>
   <button class="symbol-mode" onclick="setGameMode('symbols')"></button>
   <button class="custom-mode" onclick="setGameMode('custompictures')"></button>
+  <button class="supersecretgame" onclick="setGameMode('supersecretgame')"></button>
 
   <!-- Music Toggle -->
   <audio id="background-music" loop>
@@ -134,7 +143,8 @@
         chinese: 'chinesemode.html',
         minecraft: 'minecraftmode.html',
         symbols: 'symbolsmode.html',
-        custompictures: 'costumepicturesmode.html'
+        custompictures: 'costumepicturesmode.html',
+        supersecretgame: 'supersecretgame.html'
       };
       if (pages[mode]) {
         location.href = pages[mode];
