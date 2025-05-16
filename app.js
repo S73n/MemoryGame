@@ -222,7 +222,9 @@ document.addEventListener('DOMContentLoaded', () => {
     cardArray = symbolsModeCardArray;
   } else if (mode === 'costumepictures') {
   cardArray = costumepicturesModeCardArray;
-}
+  } else if (mode === 'supersecretgame') {
+    cardArray = supersecretgameCardArray;
+  }
 
   // Shuffle the cards randomly
   function shuffleCards() {
