@@ -136,27 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'symbol6', img: 'images/S_6.png' },
   ];
 
-  const supersecretgameCardArray = [
-    { name: 'miko', img: 'faces/Image.jpg' },
-    { name: 'aleks', img: 'faces/Image (1).jpg' },
-    { name: 'sten', img: 'faces/Image (2).jpg' },
-    { name: 'kaupo', img: 'faces/Image (3).jpg' },
-    { name: 'hendrik', img: 'faces/Image (4).jpg' },
-    { name: 'mikk', img: 'faces/Image (5).jpg' },
-    { name: 'kaspar', img: 'faces/Image (6).jpg' },
-    { name: 'tauri', img: 'faces/Image (7).jpg' },
-    { name: 'martin', img: 'faces/Image (8).jpg' },
-    { name: 'miko', img: 'faces/Image.jpg' },
-    { name: 'aleks', img: 'faces/Image (1).jpg' },
-    { name: 'sten', img: 'faces/Image (2).jpg' },
-    { name: 'kaupo', img: 'faces/Image (3).jpg' },
-    { name: 'hendrik', img: 'faces/Image (4).jpg' },
-    { name: 'mikk', img: 'faces/Image (5).jpg' },
-    { name: 'kaspar', img: 'faces/Image (6).jpg' },
-    { name: 'tauri', img: 'faces/Image (7).jpg' },
-    { name: 'martin', img: 'faces/Image (8).jpg' },
-  ]
-
   const costumepicturesModeCardArray = [];
 
   window.uploadImages = function() {
@@ -222,9 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cardArray = symbolsModeCardArray;
   } else if (mode === 'costumepictures') {
   cardArray = costumepicturesModeCardArray;
-  } else if (mode === 'supersecretgame') {
-    cardArray = supersecretgameCardArray;
-  }
+}
 
   // Shuffle the cards randomly
   function shuffleCards() {
