@@ -87,24 +87,6 @@
     .minecraft-mode{ top: 48%; right: 17%; background-image: url('buttonimg/minecraftbutton.png'); }
     .symbol-mode   { top: 58%; right: 17%; background-image: url('buttonimg/signsbutton.png'); }
     .custom-mode   { top: 68%; right: 17%; background-image: url('buttonimg/custombutton.png'); }
-
-    /* Music Button */
-    #music-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 10px 16px;
-      background-color: rgba(255, 255, 255, 0.8);
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-
-    #music-toggle:hover {
-      background-color: rgba(255, 255, 255, 1);
-    }
   </style>
 </head>
 <body>
@@ -130,7 +112,9 @@
   <audio id="background-music" loop>
     <source src="audio/elevatormusic.mp3" type="audio/mp3">
   </audio>
-  <button id="music-toggle">Toggle Music</button>
+  <button id="music-toggle" style="position: fixed; top: 400px; right: 20px; z-index: 1000;">
+    Toggle Music
+  </button>
 
   <script>
     function setGameMode(mode) {
@@ -154,12 +138,14 @@
     const music = document.getElementById('background-music');
     const toggle = document.getElementById('music-toggle');
 
+    // Try to play music if it was on last time
     window.addEventListener('DOMContentLoaded', () => {
       if (localStorage.getItem('musicOn') === 'true') {
-        music.play().catch(() => {});
+        music.play().catch(() => {}); // avoid autoplay error
       }
     });
 
+    // Toggle on click
     toggle.addEventListener('click', () => {
       if (music.paused) {
         music.play();

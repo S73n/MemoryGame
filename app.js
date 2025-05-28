@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'fries', img: 'images/fries.png' },
     { name: 'cheeseburger', img: 'images/cheeseburger.png' },
     { name: 'ice-cream', img: 'images/ice-cream.png' },
-    { name: 'pizza', img: 'images/pizza.png' },
+    { name: 'pizza', img: 'imagess/pizza.png' },
     { name: 'milkshake', img: 'images/milkshake.png' },
     { name: 'hotdog', img: 'images/hotdog.png' },
     { name: 'spaghetti', img: 'images/spaghetti.png' },
@@ -290,8 +290,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check if the game is over
     if (cardsWon.length === cardArray.length / 2) {
       resultDisplay.textContent = 'Congratulations! You found them all!';
-      stopTimer(); // Stop the timer
-      calculateTime(); // Calculate the time when game is finished
+      stopTimer();
+      const timeTaken = (Date.now() - startTime) / 1000; // Calculate time directly here
+      calculateTime(); // Call this for the display message
+      // Check achievements with the calculated time
+      checkAchievements(timeTaken, mismatchCount, mode);
     }
   }
 
@@ -317,3 +320,323 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize the game
   createBoard();
 });
+
+  // Add this variable with your other game variables
+  let mismatchCount = 0;
+
+  // Add this after your existing variables and before the mode selection
+  // ACHIEVEMENTS SYSTEM
+  // Initialize achievements tracking
+  function initializeAchievements() {
+    // Create achievements object if it doesn't exist
+    if (!localStorage.getItem('achievements')) {
+      const initialAchievements = {
+        fastTime: false,      // Complete any game under 15 seconds
+        slowTime: false,      // Take more than 2 minutes to complete a game
+        perfectGame: false,   // Complete a game without any mismatches
+        allModes: false,      // Complete all game modes
+        secretButton: false   // Find and click the secret button
+      };
+      localStorage.setItem('achievements', JSON.stringify(initialAchievements));
+    }
+
+    // Create completed modes array if it doesn't exist
+    if (!localStorage.getItem('completedModes')) {
+      localStorage.setItem('completedModes', JSON.stringify([]));
+    }
+
+    // Create achievements panel
+    createAchievementsPanel();
+    
+    // Create secret button
+    createSecretButton();
+    
+    // Update achievements display
+    updateAchievementsDisplay();
+  }
+
+  // Create achievements panel
+  function createAchievementsPanel() {
+    const achievementsPanel = document.createElement('div');
+    achievementsPanel.id = 'achievements';
+    achievementsPanel.className = 'achievements-panel';
+    document.body.appendChild(achievementsPanel);
+    
+    // Add CSS for achievements panel
+    const style = document.createElement('style');
+    style.textContent = `
+      .achievements-panel {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        z-index: 1000;
+      }
+      
+      .achievements-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        padding: 5px;
+      }
+      
+      .achievements-toggle {
+        background: rgba(0, 0, 0, 0.1);
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        font-size: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 1px 3px;
+        color: #333;
+        min-width: 15px;
+        height: 18px;
+        text-align: center;
+        line-height: 1;
+      }
+      
+      .achievements-toggle:hover {
+        background: rgba(0, 0, 0, 0.2);
+      }
+      
+      .achievements-content {
+        transition: max-height 0.3s ease;
+        overflow: hidden;
+      }
+      
+      .achievements-content.collapsed {
+        max-height: 0;
+        margin: 0;
+      }
+      
+      .achievements-content.expanded {
+        max-height: 500px;
+      }
+      
+      .achievement {
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 5px;
+        position: relative;
+      }
+      
+      .achievement.earned {
+        background-color: rgba(144, 238, 144, 0.5);
+      }
+      
+      .achievement.locked {
+        background-color: rgba(211, 211, 211, 0.5);
+        color: #777;
+      }
+      
+      .achievement h4 {
+        margin: 0 0 5px 0;
+      }
+      
+      .achievement p {
+        margin: 0;
+        font-size: 0.9em;
+      }
+      
+      .achievement .status {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 1.2em;
+      }
+      
+      .achievement-notification {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background-color: gold;
+        color: black;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        animation: slideIn 0.5s, fadeOut 0.5s 4.5s;
+        z-index: 1001;
+      }
+      
+      @keyframes slideIn {
+        from { transform: translateY(100px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+      
+      @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+      }
+      
+      #secretButton {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        width: 15px;
+        height: 15px;
+        opacity: 0.1;
+        cursor: pointer;
+        background-color: #333;
+        border: none;
+        z-index: 1000;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // Create secret button
+  function createSecretButton() {
+    const secretButton = document.createElement('button');
+    secretButton.id = 'secretButton';
+    document.body.appendChild(secretButton);
+    
+    secretButton.addEventListener('click', () => {
+      const achievements = JSON.parse(localStorage.getItem('achievements'));
+      achievements.secretButton = true;
+      localStorage.setItem('achievements', JSON.stringify(achievements));
+      updateAchievementsDisplay();
+      showAchievementNotification('Secret Finder');
+    });
+  }
+
+  // Update achievements display
+  function updateAchievementsDisplay() {
+    const achievementsPanel = document.getElementById('achievements');
+    if (!achievementsPanel) return;
+    
+    const achievements = JSON.parse(localStorage.getItem('achievements'));
+    const isCollapsed = localStorage.getItem('achievementsCollapsed') === 'true';
+    
+    achievementsPanel.innerHTML = `
+      <div class="achievements-header">
+        <h3>Achievements</h3>
+        <button class="achievements-toggle" id="achievements-toggle-btn">${isCollapsed ? '▼' : '▲'}</button>
+      </div>
+      <div class="achievements-content ${isCollapsed ? 'collapsed' : 'expanded'}" id="achievements-content">
+      </div>
+    `;
+    
+    // Add event listener to the toggle button
+    const toggleBtn = document.getElementById('achievements-toggle-btn');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', toggleAchievements);
+    }
+    
+    const achievementsContent = document.getElementById('achievements-content');
+    
+    const achievementsList = [
+      { id: 'fastTime', name: 'Speed Demon', desc: 'Complete any game under 15 seconds', earned: achievements.fastTime },
+      { id: 'slowTime', name: 'Turtle Pace', desc: 'Take more than 2 minutes to complete a game', earned: achievements.slowTime },
+      { id: 'perfectGame', name: 'Perfect Memory', desc: 'Complete a game without any mismatches', earned: achievements.perfectGame },
+      { id: 'allModes', name: 'Completionist', desc: 'Complete all game modes', earned: achievements.allModes },
+      { id: 'secretButton', name: 'Secret Finder', desc: 'Find and click the secret button', earned: achievements.secretButton }
+    ];
+    
+    achievementsList.forEach(achievement => {
+      const achievementElement = document.createElement('div');
+      achievementElement.className = `achievement ${achievement.id} ${achievement.earned ? 'earned' : 'locked'}`;
+      achievementElement.innerHTML = `
+        <h4>${achievement.name}</h4>
+        <p>${achievement.desc}</p>
+        <span class="status">${achievement.earned ? '✓' : '🔒'}</span>
+      `;
+      achievementsContent.appendChild(achievementElement);
+    });
+  }
+
+  // Toggle achievements panel
+  function toggleAchievements() {
+    const content = document.getElementById('achievements-content');
+    const toggle = document.getElementById('achievements-toggle-btn');
+    const isCollapsed = content.classList.contains('collapsed');
+    
+    if (isCollapsed) {
+      content.classList.remove('collapsed');
+      content.classList.add('expanded');
+      toggle.textContent = '▲';
+      localStorage.setItem('achievementsCollapsed', 'false');
+    } else {
+      content.classList.remove('expanded');
+      content.classList.add('collapsed');
+      toggle.textContent = '▼';
+      localStorage.setItem('achievementsCollapsed', 'true');
+    }
+  }
+
+  // Check for achievements after game completion
+  function checkAchievements(timeTaken, mismatchCount, currentMode) {
+    const achievements = JSON.parse(localStorage.getItem('achievements'));
+    const completedModes = JSON.parse(localStorage.getItem('completedModes'));
+    
+    let newAchievements = [];
+    
+    // Fast time achievement
+    if (timeTaken < 15 && !achievements.fastTime) {
+      achievements.fastTime = true;
+      newAchievements.push('Speed Demon');
+    }
+    
+    // Slow time achievement
+    if (timeTaken > 120 && !achievements.slowTime) {
+      achievements.slowTime = true;
+      newAchievements.push('Turtle Pace');
+    }
+    
+    // Perfect game achievement
+    if (mismatchCount === 0 && !achievements.perfectGame) {
+      achievements.perfectGame = true;
+      newAchievements.push('Perfect Memory');
+    }
+    
+    // Add current mode to completed modes if not already there
+    if (!completedModes.includes(currentMode)) {
+      completedModes.push(currentMode);
+    }
+    
+    // Check if all modes are completed
+    const allModes = ['easy', 'normal', 'hard', 'master', 'minecraft', 'chinese', 'symbols', 'costumepictures'];
+    const allModesCompleted = allModes.every(mode => completedModes.includes(mode));
+    
+    if (allModesCompleted && !achievements.allModes) {
+      achievements.allModes = true;
+      newAchievements.push('Completionist');
+    }
+    
+    // Save updated achievements and completed modes
+    localStorage.setItem('achievements', JSON.stringify(achievements));
+    localStorage.setItem('completedModes', JSON.stringify(completedModes));
+    
+    // Update achievements display
+    updateAchievementsDisplay();
+    
+    // Show notifications for new achievements
+    newAchievements.forEach(achievement => {
+      showAchievementNotification(achievement);
+    });
+    
+    return newAchievements;
+  }
+
+  // Show achievement notification
+  function showAchievementNotification(achievementName) {
+    const notification = document.createElement('div');
+    notification.className = 'achievement-notification';
+    notification.innerHTML = `
+      <h3>🏆 Achievement Unlocked!</h3>
+      <p>${achievementName}</p>
+    `;
+    document.body.appendChild(notification);
+    
+    // Remove notification after 5 seconds
+    setTimeout(() => {
+      notification.remove();
+    }, 5000);
+  }
+
+  // Initialize achievements system
+  initializeAchievements();
