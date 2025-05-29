@@ -374,9 +374,21 @@ function initializeAchievements() {
 
   // Create secret button
   createSecretButton();
+  
+  // Update secret button style
+  updateSecretButtonStyle();
 
   // Update achievements display
   updateAchievementsDisplay();
+  
+  // Check if the secret achievement is already unlocked and we're not in the secret game mode
+  const achievements = JSON.parse(localStorage.getItem('achievements')) || {};
+  const currentMode = localStorage.getItem('gameMode');
+  
+  // Add a hint about the secret button if the achievement isn't unlocked yet
+  if (!achievements.secretButton) {
+    console.log("%cThere's a secret button somewhere on this page...", "color: red; font-style: italic;");
+  }
 }
 
 // Create achievements panel
@@ -385,190 +397,252 @@ function createAchievementsPanel() {
   achievementsPanel.id = 'achievements';
   achievementsPanel.className = 'achievements-panel';
   document.body.appendChild(achievementsPanel);
-
+  
   // Add CSS for achievements panel
   const style = document.createElement('style');
   style.textContent = `
-      .achievements-panel {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background-color: rgba(255, 255, 255, 0.9);
-        border-radius: 10px;
-        padding: 15px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        max-width: 300px;
-        z-index: 1000;
-      }
-      
-      .achievements-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-        padding: 5px;
-      }
-      
-      .achievements-toggle {
-        background: rgba(0, 0, 0, 0.1);
-        border: 1px solid #ccc;
-        border-radius: 2px;
-        font-size: 10px;
-        font-weight: bold;
-        cursor: pointer;
-        padding: 1px 3px;
-        color: #333;
-        min-width: 15px;
-        height: 18px;
-        text-align: center;
-        line-height: 1;
-      }
-      
-      .achievements-toggle:hover {
-        background: rgba(0, 0, 0, 0.2);
-      }
-      
-      .achievements-content {
-        transition: max-height 0.3s ease;
-        overflow: hidden;
-      }
-      
-      .achievements-content.collapsed {
-        max-height: 0;
-        margin: 0;
-      }
-      
-      .achievements-content.expanded {
-        max-height: 500px;
-      }
-      
-      .achievement {
-        margin: 10px 0;
-        padding: 10px;
-        border-radius: 5px;
-        position: relative;
-      }
-      
-      .achievement.earned {
-        background-color: rgba(144, 238, 144, 0.5);
-      }
-      
-      .achievement.locked {
-        background-color: rgba(211, 211, 211, 0.5);
-        color: #777;
-      }
-      
-      .achievement h4 {
-        margin: 0 0 5px 0;
-      }
-      
-      .achievement p {
-        margin: 0;
-        font-size: 0.9em;
-      }
-      
-      .achievement .status {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 1.2em;
-      }
-      
-      .achievement-notification {
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        background-color: gold;
-        color: black;
-        padding: 15px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        animation: slideIn 0.5s, fadeOut 0.5s 4.5s;
-        z-index: 1001;
-      }
-      
-      @keyframes slideIn {
-        from { transform: translateY(100px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
-      }
-      
-      @keyframes fadeOut {
-        from { opacity: 1; }
-        to { opacity: 0; }
-      }
-      
-      #secretButton {
-        position: fixed;
-        bottom: 10px;
-        right: 10px;
-        width: 15px;
-        height: 15px;
-        opacity: 0.1;
-        cursor: pointer;
-        background-color: #333;
-        border: none;
-        z-index: 1000;
-      }
-    `;
+    .achievements-panel {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      max-width: 300px;
+      z-index: 1000;
+    }
+    
+    .achievements-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+    
+    .achievements-toggle {
+      background: rgba(0, 0, 0, 0.1);
+      border: 1px solid #ccc;
+      border-radius: 2px;
+      font-size: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 1px 3px;
+      color: #333;
+      min-width: 15px;
+      height: 18px;
+      text-align: center;
+      line-height: 1;
+    }
+    
+    .achievements-toggle:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    
+    .achievements-content {
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+    }
+    
+    .achievements-content.collapsed {
+      max-height: 0;
+      margin: 0;
+    }
+    
+    .achievements-content.expanded {
+      max-height: 500px;
+    }
+    
+    .achievement {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    
+    .achievement.earned {
+      background-color: rgba(144, 238, 144, 0.5);
+    }
+    
+    .achievement.locked {
+      background-color: rgba(211, 211, 211, 0.5);
+      color: #777;
+    }
+    
+    .achievement-icon {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .achievement-icon img {
+      max-width: 100%;
+      max-height: 100%;
+      opacity: 1;
+    }
+    
+    .achievement.locked .achievement-icon img {
+      opacity: 0.5;
+      filter: grayscale(100%);
+    }
+    
+    .achievement-info {
+      flex: 1;
+    }
+    
+    .achievement h4 {
+      margin: 0 0 5px 0;
+    }
+    
+    .achievement p {
+      margin: 0;
+      font-size: 0.9em;
+    }
+    
+    .achievement .status {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.2em;
+    }
+    
+    .achievement-notification {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: gold;
+      color: black;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      animation: slideIn 0.5s, fadeOut 0.5s 4.5s;
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+    }
+    
+    @keyframes slideIn {
+      from { transform: translateY(100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+  `;
   document.head.appendChild(style);
 }
 
-// Create secret button
+// Create secret button with proper navigation to supersecretgame.html
 function createSecretButton() {
+  // Remove any existing secret button first
+  const existingButton = document.getElementById('secretButton');
+  if (existingButton) {
+    existingButton.remove();
+  }
+
   const secretButton = document.createElement('button');
   secretButton.id = 'secretButton';
+  secretButton.title = "Secret Button";
   document.body.appendChild(secretButton);
 
   secretButton.addEventListener('click', () => {
-    const achievements = JSON.parse(localStorage.getItem('achievements'));
+    // Update achievements
+    const achievements = JSON.parse(localStorage.getItem('achievements')) || {};
     achievements.secretButton = true;
     localStorage.setItem('achievements', JSON.stringify(achievements));
-    updateAchievementsDisplay();
+    
+    // Set the game mode to supersecretgame
+    localStorage.setItem('gameMode', 'supersecretgame');
+    
+    // Show achievement notification
     showAchievementNotification('Secret Finder');
+    
+    // Navigate to the supersecretgame.html page after a short delay
+    setTimeout(() => {
+      window.location.href = 'supersecretgame.html';
+    }, 1500);
   });
+
+  // Add CSS for the secret button
+  const style = document.createElement('style');
+  style.textContent = `
+    #secretButton {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      width: 20px;
+      height: 20px;
+      opacity: 0.05;
+      cursor: pointer;
+      background-color: #ff0000;
+      border: none;
+      border-radius: 50%;
+      z-index: 1000;
+      transition: opacity 0.3s;
+    }
+    
+    #secretButton:hover {
+      opacity: 0.2;
+    }
+  `;
+  document.head.appendChild(style);
 }
 
 // Update achievements display
 function updateAchievementsDisplay() {
   const achievementsPanel = document.getElementById('achievements');
   if (!achievementsPanel) return;
-
+  
   const achievements = JSON.parse(localStorage.getItem('achievements'));
   const isCollapsed = localStorage.getItem('achievementsCollapsed') === 'true';
-
+  
   achievementsPanel.innerHTML = `
-      <div class="achievements-header">
-        <h3>Achievements</h3>
-        <button class="achievements-toggle" id="achievements-toggle-btn">${isCollapsed ? '▼' : '▲'}</button>
-      </div>
-      <div class="achievements-content ${isCollapsed ? 'collapsed' : 'expanded'}" id="achievements-content">
-      </div>
-    `;
-
+    <div class="achievements-header">
+      <h3>Achievements</h3>
+      <button class="achievements-toggle" id="achievements-toggle-btn">${isCollapsed ? '▼' : '▲'}</button>
+    </div>
+    <div class="achievements-content ${isCollapsed ? 'collapsed' : 'expanded'}" id="achievements-content">
+    </div>
+  `;
+  
   // Add event listener to the toggle button
   const toggleBtn = document.getElementById('achievements-toggle-btn');
   if (toggleBtn) {
     toggleBtn.addEventListener('click', toggleAchievements);
   }
-
+  
   const achievementsContent = document.getElementById('achievements-content');
-
+  
   const achievementsList = [
-    { id: 'fastTime', name: 'Speed Demon', desc: 'Complete any game under 15 seconds', earned: achievements.fastTime },
-    { id: 'slowTime', name: 'Turtle Pace', desc: 'Take more than 2 minutes to complete a game', earned: achievements.slowTime },
-    { id: 'perfectGame', name: 'Perfect Memory', desc: 'Complete a game without any mismatches', earned: achievements.perfectGame },
-    { id: 'allModes', name: 'Completionist', desc: 'Complete all game modes', earned: achievements.allModes },
-    { id: 'secretButton', name: 'Secret Finder', desc: 'Find and click the secret button', earned: achievements.secretButton }
+    { id: 'fastTime', name: 'Speed Demon', desc: 'Complete any game under 15 seconds', earned: achievements.fastTime, icon: 'images/fastmasterACH.png' },
+    { id: 'slowTime', name: 'Turtle Pace', desc: 'Take more than 2 minutes to complete a game', earned: achievements.slowTime, icon: 'images/slowpokeACH.png' },
+    { id: 'perfectGame', name: 'Perfect Memory', desc: 'Complete a game without any mismatches', earned: achievements.perfectGame, icon: 'images/100accACH.png' },
+    { id: 'allModes', name: 'Completionist', desc: 'Complete all game modes', earned: achievements.allModes, icon: 'images/compAllUnder40s.png' },
+    { id: 'secretButton', name: 'Secret Finder', desc: 'Find and click the secret button', earned: achievements.secretButton, icon: 'images/secretDiffACH.png' }
   ];
-
+  
   achievementsList.forEach(achievement => {
     const achievementElement = document.createElement('div');
     achievementElement.className = `achievement ${achievement.id} ${achievement.earned ? 'earned' : 'locked'}`;
     achievementElement.innerHTML = `
+      <div class="achievement-icon">
+        <img src="${achievement.icon}" alt="${achievement.name} icon">
+      </div>
+      <div class="achievement-info">
         <h4>${achievement.name}</h4>
         <p>${achievement.desc}</p>
-        <span class="status">${achievement.earned ? '✓' : '🔒'}</span>
-      `;
+      </div>
+      <span class="status">${achievement.earned ? '✓' : '🔒'}</span>
+    `;
     achievementsContent.appendChild(achievementElement);
   });
 }
@@ -646,20 +720,50 @@ function checkAchievements(timeTaken, mismatchCount, currentMode) {
   return newAchievements;
 }
 
-// Show achievement notification
+// Show achievement notification with improved styling
 function showAchievementNotification(achievementName) {
   const notification = document.createElement('div');
   notification.className = 'achievement-notification';
-  notification.innerHTML = `
-      <h3>🏆 Achievement Unlocked!</h3>
-      <p>${achievementName}</p>
-    `;
+  
+  // Add special message for Secret Finder achievement
+  let message = `🏆 Achievement Unlocked: ${achievementName}`;
+  if (achievementName === 'Secret Finder') {
+    message += '<br><span style="font-size: 0.9em; font-style: italic;">Loading secret game mode...</span>';
+  }
+  
+  notification.innerHTML = message;
   document.body.appendChild(notification);
 
   // Remove notification after 5 seconds
   setTimeout(() => {
     notification.remove();
   }, 5000);
+}
+
+// Update the CSS for the secret button to make it slightly more visible but still hidden
+function updateSecretButtonStyle() {
+  const style = document.createElement('style');
+  style.textContent += `
+    #secretButton {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      width: 20px;
+      height: 20px;
+      opacity: 0.05;
+      cursor: pointer;
+      background-color: #ff0000;
+      border: none;
+      border-radius: 50%;
+      z-index: 1000;
+      transition: opacity 0.3s;
+    }
+    
+    #secretButton:hover {
+      opacity: 0.2;
+    }
+  `;
+  document.head.appendChild(style);
 }
 
 // Initialize achievements system
